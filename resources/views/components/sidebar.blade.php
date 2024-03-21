@@ -4,7 +4,7 @@
             <a href="{{ route('home') }}">kimcil rebel</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">KR</a>
+            <a href="#">KR</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -19,5 +19,20 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ Request::is('doctor*') || Request::is('doctor/*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown">
+                    <i class="fas fa-users"></i>
+                    Doctors
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('doctor') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('doctor.index') }}">Doctors</a>
+                    </li>
+                    <li class="{{ Request::is('doctor-schedule*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('doctor-schedule.index') }}">Schedule</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </aside>
 </div>

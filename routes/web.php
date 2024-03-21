@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Doctor\DoctorController;
+use App\Http\Controllers\Doctor\DoctorScheduleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +26,6 @@ Route::middleware(['auth'])->group(function () {
     })->name('home');
 
     Route::resource('users', UserController::class);
+    Route::resource('doctor', DoctorController::class);
+    Route::resource('doctor-schedule', DoctorScheduleController::class);
 });
-// Route::get('/login', function () {
-//     return view('pages.auth.login');
-// })->name('dashboard');
