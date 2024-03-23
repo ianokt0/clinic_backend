@@ -21,7 +21,7 @@ class DoctorScheduleFactory extends Factory
             'doctor_id' => Doctor::factory(),
             'day' => $this->faker->randomElement(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']),
             'time' => fake()->time(),
-            'status' => fake()->randomElement(['Active']),
+            'status' => fake()->randomElement(['active']),
             'note' => fake()->word(),
         ];
     }

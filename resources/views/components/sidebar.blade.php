@@ -19,13 +19,13 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown {{ Request::is('doctor*') || Request::is('doctor/*') ? 'active' : '' }}">
+            <li class="nav-item dropdown {{ Request::is('doctor*') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown">
                     <i class="fas fa-users"></i>
                     Doctors
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('doctor') ? 'active' : '' }}">
+                    <li class="{{ Request::is('doctor') || Request::is('doctor/*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('doctor.index') }}">Doctors</a>
                     </li>
                     <li class="{{ Request::is('doctor-schedule*') ? 'active' : '' }}">

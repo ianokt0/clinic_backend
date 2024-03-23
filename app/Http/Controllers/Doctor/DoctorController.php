@@ -107,6 +107,16 @@ class DoctorController extends Controller
             ]);
 
             $doctor = Doctor::whereId($id)->lockForUpdate()->first();
+            //image
+            if ($request->file('photo')) {
+                $photo = $request->file('photo');
+                $photo->storeAs('public/doctors', $doctor->id . '.' . $photo->getClientOriginalExtension());
+                $doctor->update(
+                    [
+                        'photo' => 'storage/doctors/' . $doctor->id . '.' . $photo->getClientOriginalExtension()
+                    ]
+                );
+            }
             $doctor->update($request->except('_token', 'photo'));
             DB::commit();
             return redirect()->route('doctor.index')->with('success', 'Berhasil Update Doctor');

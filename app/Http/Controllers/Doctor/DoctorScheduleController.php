@@ -19,7 +19,7 @@ class DoctorScheduleController extends Controller
             ->when($request->input('doctor_id'), function ($query, $doctor_id) {
                 return $query->where('doctor_id', $doctor_id);
             })
-            ->orderBy('doctor_id', 'asc')
+            ->orderBy('id', 'desc')
             ->paginate(10);
         return view('pages.doctors.doctor-schedule.index', compact('doctorSchedule'));
     }
@@ -29,7 +29,7 @@ class DoctorScheduleController extends Controller
      */
     public function create()
     {
-        $doctors = Doctor::all();
+        $doctors = Doctor::orderBy('doctor_name', 'asc')->get();
         return view('pages.doctors.doctor-schedule.create', compact('doctors'));
     }
 
@@ -42,10 +42,58 @@ class DoctorScheduleController extends Controller
         try {
             $request->validate([
                 'doctor_id' => 'required',
-                'day' => 'required',
-                'time' => 'required',
             ]);
-            DoctorSchedule::create($request->except('_token'));
+
+            if ($request->senin) {
+                DoctorSchedule::create([
+                    'doctor_id' => $request->doctor_id,
+                    'day' => 'Senin',
+                    'time' => $request->senin,
+                ]);
+            }
+            if ($request->selasa) {
+                DoctorSchedule::create([
+                    'doctor_id' => $request->doctor_id,
+                    'day' => 'Selasa',
+                    'time' => $request->selasa,
+                ]);
+            }
+            if ($request->rabu) {
+                DoctorSchedule::create([
+                    'doctor_id' => $request->doctor_id,
+                    'day' => 'Rabu',
+                    'time' => $request->rabu,
+                ]);
+            }
+            if ($request->kamis) {
+                DoctorSchedule::create([
+                    'doctor_id' => $request->doctor_id,
+                    'day' => 'Kamis',
+                    'time' => $request->kamis,
+                ]);
+            }
+            if ($request->jumat) {
+                DoctorSchedule::create([
+                    'doctor_id' => $request->doctor_id,
+                    'day' => 'Jumat',
+                    'time' => $request->jumat,
+                ]);
+            }
+            if ($request->sabtu) {
+                DoctorSchedule::create([
+                    'doctor_id' => $request->doctor_id,
+                    'day' => 'Sabtu',
+                    'time' => $request->sabtu,
+                ]);
+            }
+            if ($request->minggu) {
+                DoctorSchedule::create([
+                    'doctor_id' => $request->doctor_id,
+                    'day' => 'Minggu',
+                    'time' => $request->minggu,
+                ]);
+            }
+
             DB::commit();
             return redirect()->route('doctor-schedule.index')->with('success', 'Berhasil menambah schedule doctor');
         } catch (\Exception $e) {
