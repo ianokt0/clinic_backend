@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use App\Models\Doctor\Doctor;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\DoctorScheduleSeeder;
+use Database\Seeders\Patient\PatientSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -35,6 +37,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             DoctorScheduleSeeder::class,
+            PatientSeeder::class,
         ]);
     }
 }

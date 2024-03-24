@@ -33,6 +33,17 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item dropdown {{ Request::is('patient*') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown">
+                    <i class="fas fa-users"></i>
+                    Patients
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('patient') || Request::is('patient/*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('patient.index') }}">Patient</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </div>
