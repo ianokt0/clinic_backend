@@ -18,11 +18,11 @@ class PatientFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'nik' => $this->faker->numberBetween(1, 100),
+            'nik' => $this->faker->unique()->numberBetween(1, 100),
             'kk' => $this->faker->word(),
             'phone' => fake()->phoneNumber(),
             'email' => fake()->safeEmail(),
-            'gender' => fake()->randomElement(['Male', 'Female']),
+            'gender' => fake()->randomElement(['Pria', 'Wanita']),
             'birth_place' => fake()->word(),
             'birth_date' => fake()->date(),
             'is_deceased' => false,

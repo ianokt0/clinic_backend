@@ -12,9 +12,9 @@
         <section class="section">
             <div class="section-header">
                 <h1>Patient</h1>
-                <div class="section-header-button">
+                {{-- <div class="section-header-button">
                     <a href="{{ route('patient.create') }}" class="btn btn-primary">Add New</a>
-                </div>
+                </div> --}}
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item">Patients</div>
@@ -27,9 +27,6 @@
                     </div>
                 </div>
                 <h2 class="section-title">Patients</h2>
-                <p class="section-lead">
-                    You can manage all Patients, such as editing, deleting and more.
-                </p>
 
                 <div class="row mt-4">
                     <div class="col-12">
@@ -49,7 +46,7 @@
                                 <div class="float-right">
                                     <form method="GET" action="{{ route('patient.index') }}">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="Search" name="name">
+                                            <input type="text" class="form-control" placeholder="Search" name="nik">
                                             <div class="input-group-append">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -63,12 +60,12 @@
                                     <table class="table-striped table">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Nama</th>
                                                 <th>Nik</th>
-                                                <th>Phone</th>
-                                                <th>Deceased</th>
-                                                <th>Gender</th>
-                                                <th>Action</th>
+                                                <th>No Hp</th>
+                                                <th>Status</th>
+                                                <th>Jenis Kelamin</th>
+                                                <th>Tanggal Lahir</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -89,25 +86,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $patient->gender }}</td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-center">
-                                                            <a href='{{ route('patient.edit', $patient->id) }}'
-                                                                class="btn btn-sm btn-info btn-icon">
-                                                                <i class="fas fa-edit"></i>
-                                                                Edit
-                                                            </a>
-                                                            <form action="{{ route('patient.destroy', $patient->id) }}"
-                                                                method="POST" class="ml-2">
-                                                                <input type="hidden" name="_method" value="DELETE" />
-                                                                <input type="hidden" name="_token"
-                                                                    value="{{ csrf_token() }}" />
-                                                                <button
-                                                                    class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                    <i class="fas fa-times"></i> Delete
-                                                                </button>
-                                                            </form>
-                                                        </div>
-                                                    </td>
+                                                    <td>{{ $patient->birth_date }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

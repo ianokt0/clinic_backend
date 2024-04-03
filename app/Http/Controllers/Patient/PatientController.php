@@ -8,10 +8,13 @@ use App\Http\Controllers\Controller;
 
 class PatientController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $patients = Patient::paginate(10);
-        return view('pages.patient.index',compact('patients'));
+        $patients = Patient::when($request->input('nik'), function ($query, $nik) {
+            return $query->where('nik', 'like', '%' . $nik . '%');
+        })
+            ->paginate(10);
+        return view('pages.patient.index', compact('patients'));
     }
 
     // create
@@ -25,8 +28,8 @@ class PatientController extends Controller
     {
         dd($request->all());
         $request->validate([
-            'name' =>'required',
-            'email' =>'required',
+            'name' => 'required',
+            'email' => 'required',
         ]);
 
         Patient::create([
